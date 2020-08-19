@@ -16,8 +16,8 @@
           style="width: 20px; height: 20px"
           :class="`bg-${ item.status }`"
         />
-        <strong class="mr-auto">六角實戰班</strong>
-        <small>現在</small>
+        <strong class="mr-auto">系統訊息</strong>
+        <small>{{ item.showtime }}</small>
         <button
           type="button"
           class="ml-2 mb-1 close"
@@ -36,7 +36,7 @@
 </template>
 
 <script>
-
+/* global $ */
 export default {
   name: 'Toasts',
   data() {
@@ -53,10 +53,12 @@ export default {
   methods: {
     updateMessage(message, status) {
       const timestamp = Math.floor(new Date() / 1000);
+      const showtime = new Date().toLocaleString('chinese', { hour12: false });
       this.messages.push({
         message,
         status,
         timestamp,
+        showtime,
       });
       this.removeMessageWithTiming(timestamp);
     },
@@ -71,10 +73,9 @@ export default {
             vm.messages.splice(i, 1);
           }
         });
-      }, 500000);
+      }, 30000);
     },
     closeToast(element) {
-      // eslint-disable-next-line no-undef
       $(`#${element}`).toast('hide');
     },
   },

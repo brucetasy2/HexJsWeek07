@@ -82,6 +82,7 @@ export default {
       },
       token: '',
       expired: '',
+      isLoading: false,
     };
   },
 
@@ -92,6 +93,7 @@ export default {
       // console.log(`this.user=${this.user.email}`);
       // console.log(`this.user=${this.user.password}`);
       // console.log(`this.token=${this.token}`);
+      this.isLoading = true;
       this.$http
         .post(api, this.user)
         .then((response) => {
@@ -99,10 +101,11 @@ export default {
           const { expired } = response.data;
           // 寫入 cookie token  expires 設置有效時間
           document.cookie = `token=${token}; expires=${new Date(expired * 1000)}; path=/`;
-          console.log(`okay ${token}`);
+          // console.log(`okay ${token}`);
           this.$bus.$emit('message:push',
             '登入成功',
             'success');
+          this.isLoading = false;
           this.$router.push('/admin/Orders');
         })
         .catch((error) => {
@@ -111,6 +114,7 @@ export default {
             `登入失敗惹，好糗Σ( ° △ °|||)︴
             ${error}`,
             'danger');
+          this.isLoading = false;
         });
     },
 
@@ -123,5 +127,22 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+html,
+body {
+  height: 100%;
+  text-align: center;
+}
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
 </style>

@@ -1,19 +1,46 @@
 import Vue from 'vue';
-import axios from 'axios'; // 01
-import Loading from 'vue-loading-overlay'; // 02A Loading 套件
-import 'vue-loading-overlay/dist/vue-loading.css'; // 02B Loading 套件
-import $ from 'jquery'; // 03
-import './bus'; // 04 bus
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+import jquery from 'jquery';
+import {
+  ValidationObserver,
+  ValidationProvider, configure, localize, extend,
+} from 'vee-validate'; // 驗證套件
+import * as rules from 'vee-validate/dist/rules'; // 規則檔案（ex: email...）
+import zhTW from 'vee-validate/dist/locale/zh_TW.json'; // 語系檔案
+import 'bootstrap';
+// Bus
+import './bus';
+// Loading 套件
+import Loading from 'vue-loading-overlay';
+import 'vue-loading-overlay/dist/vue-loading.css';
 import App from './App.vue';
 import router from './router';
+// import currencyFilter from './filters/currency';
+// import dateFilter from './filters/date';
+// Import stylesheet
 
-Vue.prototype.$http = axios; // 01
-Vue.component('Loading', Loading); // 02
-Vue.use(Loading); // 02
-Vue.prototype.$jq = $; // 03
-window.$ = $; // 03
+window.$ = jquery;
 
+Vue.use(VueAxios, axios);
 Vue.config.productionTip = false;
+
+Vue.use(Loading);
+Vue.component('Loading', Loading);
+
+// vee-validate
+Object.keys(rules).forEach((rule) => {
+  extend(rule, rules[rule]);
+}); // 所有驗證規則
+configure({
+  classes: {
+    valid: 'is-valid',
+    invalid: 'is-invalid',
+  },
+});
+localize('tw', zhTW);
+Vue.component('ValidationObserver', ValidationObserver);
+Vue.component('ValidationProvider', ValidationProvider);
 
 new Vue({
   router,

@@ -102,18 +102,13 @@ export default {
           // 寫入 cookie token  expires 設置有效時間
           document.cookie = `token=${token}; expires=${new Date(expired * 1000)}; path=/`;
           // console.log(`okay ${token}`);
-          this.$bus.$emit('message:push',
-            '登入成功',
-            'success');
+          this.$bus.$emit('message:push', '登入成功', 'success');
           this.isLoading = false;
           this.$router.push('/admin/Orders');
         })
         .catch((error) => {
           console.log(error);
-          this.$bus.$emit('message:push',
-            `登入失敗惹，好糗Σ( ° △ °|||)︴
-            ${error}`,
-            'danger');
+          this.$bus.$emit('message:push', `登入失敗!${error}`, 'danger');
           this.isLoading = false;
         });
     },

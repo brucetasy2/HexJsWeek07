@@ -1,16 +1,17 @@
 <template>
   <div>
-    <Sidebar />
+    <Navbar />
     <div class="container-fluid">
       <div class="row">
         <main
           role="main"
           class="col-md-12 ml-sm-auto px-4"
         >
-          <router-view
+          <!-- <router-view
             v-if="checkSuccess"
             :token="token"
-          />
+          /> -->
+          <router-view />
         </main>
       </div>
     </div>
@@ -18,12 +19,12 @@
 </template>
 
 <script>
-import Sidebar from '@/components/Navbar.vue';
+import Navbar from '@/components/Navbar.vue';
 
 export default {
   name: 'Dashboard',
   components: {
-    Sidebar,
+    Navbar,
   },
   data() {
     return {

@@ -24,19 +24,22 @@
         <li class="nav-item">
           <router-link
             class="nav-link"
-            :to="{ name: '產品頁面'}"
+            :to="{ name: '001產品頁面'}"
           >
             產品列表
           </router-link>
         </li>
-        <!-- <li class="nav-item">
+        <!--
+          <li class="nav-item">
           <router-link
             class="nav-link"
             :to="{ name: '優惠券'}"
           >
             優惠卷列表
           </router-link>
-        </li><li class="nav-item">
+        </li>
+
+        <li class="nav-item">
           <router-link
             class="nav-link"
             :to="{ name: '圖片頁面'}"
@@ -44,6 +47,7 @@
             圖片頁面
           </router-link>
         </li> -->
+
         <li class="nav-item">
           <router-link
             class="nav-link"
@@ -52,6 +56,7 @@
             訂單列表
           </router-link>
         </li>
+
         <!-- <li class="nav-item">
           <router-link
             class="nav-link"
@@ -60,6 +65,7 @@
             模擬下單系統
           </router-link>
         </li> -->
+
         <li class="nav-item">
           <a
             class="nav-link"
